@@ -48,13 +48,17 @@ export default function Home() {
     setMessages([{ type: "user", content: userQuery }]);
 
     try {
-      const response = await fetch("http://localhost:3001/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: userQuery }),
-      });
+      // const response = await fetch("http://localhost:3001/chat", {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/chat`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: userQuery }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch response");
